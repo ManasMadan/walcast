@@ -1,0 +1,10 @@
+packages:
+  - packages/*
+  - apps/*
+  - examples/*
+  - docs
+  - bench
+  - demo
+allowBuilds:
+  esbuild: true
+  protobufjs: true
