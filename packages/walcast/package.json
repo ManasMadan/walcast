@@ -1,0 +1,50 @@
+{
+  "name": "walcast",
+  "version": "0.1.0",
+  "description": "Postgres change data capture (logical replication) for Node. The core does the least, best, for the most — every event transport is a plugin.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ManasMadan/walcast.git"
+  },
+  "keywords": [
+    "postgres",
+    "cdc",
+    "change-data-capture",
+    "logical-replication",
+    "pgoutput",
+    "wal",
+    "replication"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "walcast": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@walcast/plugin-kit": "workspace:^",
+    "pg": "^8.22.0"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.20.0"
+  },
+  "publishConfig": {
+    "provenance": true
+  }
+}
