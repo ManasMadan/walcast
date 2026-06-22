@@ -1,0 +1,40 @@
+{
+  "name": "@walcast/plugin-kit",
+  "version": "0.1.0",
+  "description": "The walcast sink contract: Sink types and the conformance test harness every sink — official or community — must pass.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ManasMadan/walcast.git",
+    "directory": "packages/plugin-kit"
+  },
+  "keywords": [
+    "walcast",
+    "cdc",
+    "postgres",
+    "sink",
+    "plugin"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
