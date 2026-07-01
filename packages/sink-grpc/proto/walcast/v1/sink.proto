@@ -1,0 +1,46 @@
+// The walcast gRPC sink contract. Implement WalcastSink on your server and
+// point @walcast/sink-grpc at it — the sink is a gRPC *client* that pushes
+// ordered batches to you.
+//
+// Semantics: at-least-once. Return ok=true only after you have durably
+// processed the batch; anything else (ok=false, an error status, a timeout)
+// makes the walcast engine retry with backoff. Batches may be redelivered —
+// deduplicate on ChangeEvent.id, which is stable across redeliveries.
+syntax = "proto3";
+
+package walcast.v1;
+
+service WalcastSink {
+  // Deliver one ordered batch of change events.
+  rpc Deliver(ChangeEventBatch) returns (DeliverAck);
+}
+
+message ChangeEventBatch {
+  repeated ChangeEvent events = 1;
+}
+
+message ChangeEvent {
+  // Deterministic id: "<commit_lsn>:<index within transaction>".
+  string id = 1;
+  // WAL position of this individual change, e.g. "0/1A2B3C4".
+  string lsn = 2;
+  // Commit LSN of the containing transaction; events are ordered by it.
+  string commit_lsn = 3;
+  // Transaction commit time, ISO 8601.
+  string commit_time = 4;
+  string schema = 5;
+  string table = 6;
+  // insert | update | delete | truncate
+  string op = 7;
+  // Row images as JSON documents; empty string when absent. JSON (not
+  // Struct) keeps every Postgres type representable exactly as the
+  // pgoutput text form delivered it.
+  string before_json = 8;
+  string after_json = 9;
+}
+
+message DeliverAck {
+  bool ok = 1;
+  // Optional diagnostic carried into the walcast daemon's logs.
+  string message = 2;
+}
