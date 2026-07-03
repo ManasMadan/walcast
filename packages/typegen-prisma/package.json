@@ -1,0 +1,45 @@
+{
+  "name": "@walcast/typegen-prisma",
+  "version": "0.1.0",
+  "description": "Generate typed walcast change events from a Prisma schema. Pure codegen — zero runtime footprint.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ManasMadan/walcast.git",
+    "directory": "packages/typegen-prisma"
+  },
+  "keywords": [
+    "walcast",
+    "cdc",
+    "postgres",
+    "prisma",
+    "codegen",
+    "types"
+  ],
+  "bin": "./dist/cli.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
