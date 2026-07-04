@@ -1,0 +1,13 @@
+{
+  "name": "@walcast/example-library-basic",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Library mode, zero plugins: iterate changes() in your own process and ack as you go.",
+  "type": "module",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "dependencies": {
+    "walcast": "workspace:*"
+  }
+}
