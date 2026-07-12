@@ -1,0 +1,47 @@
+# walcast
+
+> Postgres change data capture (logical replication) for Node. The core does the least, best, for the most: a hand-written pgoutput decoder speaking the streaming replication protocol, exposed as an async iterator with explicit LSN acknowledgment. Everything that transports events is a plugin — walcast ships zero sinks, the way @babel/core ships zero transforms.
+
+Key facts:
+- Library mode needs no plugins: `for await (const event of tr.changes()) { ...; tr.ack(event) }` — your code is the sink.
+- Delivery is at-least-once with deterministic, LSN-derived event ids (`commit_lsn:index`); redelivered events carry identical ids, so consumers achieve exactly-once processing via idempotency.
+- The Kafka sink achieves exactly-once *into the topic* via transactional writes plus a compacted checkpoint topic; consumers use read_committed.
+- Exactly-once *delivery* over webhooks/SSE is impossible and never claimed.
+- Daemon mode (`npx walcast serve`) runs sink plugins with ordering, batching, retries, backpressure, and per-sink LSN checkpoints; the replication slot advances only to the minimum acked LSN across durable sinks. Ephemeral sinks never hold WAL back.
+- Requires Postgres 14+ with wal_level=logical; Node >= 20. `before` images require REPLICA IDENTITY FULL. An abandoned replication slot retains WAL forever — tear down what you stop using.
+
+## Guide
+
+- [Why walcast](https://walcast.mmadan.in/guide/why-walcast): the microkernel philosophy — data plane = plugins, control plane = core
+- [Quickstart: library](https://walcast.mmadan.in/guide/quickstart-library): the zero-plugin async iterator with ack()
+- [Quickstart: daemon](https://walcast.mmadan.in/guide/quickstart-daemon): install a sink, configure, serve, open /ui
+- [Concepts](https://walcast.mmadan.in/guide/concepts): WAL, replication slots, LSNs, pgoutput framing, the standby feedback loop
+- [Delivery guarantees](https://walcast.mmadan.in/guide/delivery-guarantees): why exactly-once delivery is impossible; the Kafka transactional design with both crash-window walkthroughs
+- [Writing a sink](https://walcast.mmadan.in/guide/writing-a-sink): the Sink contract and conformance harness, a complete sink in 15 minutes
+- [Typed events](https://walcast.mmadan.in/guide/typed-events): @walcast/typegen-prisma codegen
+- [Monitoring](https://walcast.mmadan.in/guide/monitoring): slot lag, retained WAL, backpressure
+- [Production checklist](https://walcast.mmadan.in/guide/production-checklist)
+- [Comparisons](https://walcast.mmadan.in/guide/comparisons): Debezium, Supabase Realtime, Sequin, walstream
+
+## Sinks
+
+- [Webhook](https://walcast.mmadan.in/guide/sinks/webhook): durable HTTP POST, HMAC-SHA256 signed, stdlib only
+- [SSE](https://walcast.mmadan.in/guide/sinks/sse): ephemeral live tail; excluded from slot advancement
+- [Kafka](https://walcast.mmadan.in/guide/sinks/kafka): exactly-once into the topic via transactions + checkpoint topic
+- [gRPC](https://walcast.mmadan.in/guide/sinks/grpc): push batches to your server implementing walcast.v1.WalcastSink
+
+## Reference
+
+- [Event schema](https://walcast.mmadan.in/reference/event-schema): the ChangeEvent shape and id determinism
+- [Configuration](https://walcast.mmadan.in/reference/config): walcast.config.json and environment overrides
+- [HTTP API](https://walcast.mmadan.in/reference/http-api): /healthz, /api/stats, /api/sinks, pause/resume, plugin routes
+- [CLI](https://walcast.mmadan.in/reference/cli): setup, serve, status, teardown
+- [gRPC contract](https://walcast.mmadan.in/reference/grpc-contract): the published .proto
+
+## Optional
+
+- [Repository](https://github.com/ManasMadan/walcast)
+- [Plugin template](https://github.com/ManasMadan/walcast/tree/master/templates/plugin)
+- [Examples](https://github.com/ManasMadan/walcast/tree/master/examples)
+- [Design decisions](https://github.com/ManasMadan/walcast/blob/master/DECISIONS.md)
+- [Roadmap](https://github.com/ManasMadan/walcast/blob/master/ROADMAP.md)
