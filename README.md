@@ -100,6 +100,17 @@ conformance harness the official sinks pass in CI. Start from
 - Exactly-once _delivery_ over webhooks/SSE is impossible (the receiver can
   fail between processing and acknowledging), and walcast never claims it.
 
+## Numbers
+
+Measured end-to-end by `npm run bench` (M-series laptop, dockerized
+Postgres 16 + single-node Kafka, 4 writers, single-row transactions):
+
+| metric                                 | result                                                    |
+| -------------------------------------- | --------------------------------------------------------- |
+| sustained throughput                   | **3,689 events/s** (55,351 committed transactions in 15s) |
+| commit → webhook                       | **p50 5 ms · p95 10 ms**                                  |
+| commit → Kafka (EOS, `read_committed`) | **p50 24 ms · p95 68 ms**                                 |
+
 ## Compared to
 
 |                        | walcast                         | Debezium                    | Supabase Realtime | Sequin         |
