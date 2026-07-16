@@ -48,6 +48,30 @@ just defer the surprise. Acking a transaction's last event advances the slot
 past the whole transaction (the engine upgrades that event's ack target to
 the commit's end LSN when it sees the Commit record).
 
+## `ack()` sweeps by delivery order, not LSN order
+
+The obvious implementation of cumulative acking — "drop every outstanding
+entry with an LSN at or below the acked one" — is wrong with interleaved
+transactions. pgoutput serializes by _commit_ order, so a change belonging
+to a later-committing transaction can sit at a lower WAL position than an
+earlier commit's end; the LSN sweep would drop that entry as a side effect
+and let the slot advance past work nobody processed. Sweeping the delivery-
+order prefix instead is always safe, because redelivery after a restart is
+keyed off commit positions: anything still outstanding committed later than
+the acked event and will come back. There is a regression test that stages
+exactly this interleaving against a live Postgres.
+
+## Keepalives flow through the frame queue, not a side channel
+
+Confirming an idle keepalive's position used to be decided in the socket
+handler via a callback. That races: one TCP chunk can carry
+`[Begin, Insert, Commit, Keepalive]`, and the callback ran while the data
+frames were still undecoded in a microtask — "everything is drained" was
+true from the callback's view and false in reality, and a crash right then
+lost the transaction. Keepalives now travel through the same ordered queue
+as data frames, so the drained check runs strictly after everything that
+arrived before them.
+
 ## Idle keepalive positions are confirmed only when fully drained
 
 Confirming a keepalive's `walEnd` too eagerly can lose data (frames for an
