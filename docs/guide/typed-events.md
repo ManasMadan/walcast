@@ -44,7 +44,7 @@ Types are honest about what pgoutput actually delivers: text-format tuples, [dec
 | `Boolean`      | `boolean`         | decoded from `t`/`f`                                                                                                                          |
 | `Int`          | `number`          | `int2`/`int4` fit safely                                                                                                                      |
 | `Float`        | `number`          | `float4`/`float8`                                                                                                                             |
-| `BigInt`       | `string`          | `int8` can exceed `Number.MAX_SAFE_INTEGER`; walcast refuses to corrupt big ids silently                                                     |
+| `BigInt`       | `string`          | `int8` can exceed `Number.MAX_SAFE_INTEGER`; walcast refuses to corrupt big ids silently                                                      |
 | `Decimal`      | `string`          | `numeric` loses precision as a float                                                                                                          |
 | `DateTime`     | `string`          | Postgres text form, e.g. `"2026-07-19 12:00:00+00"` — parse it yourself (`new Date(...)`) when you're sure of the column's timezone semantics |
 | `Json`         | `JsonValue`       | `json`/`jsonb` are parsed by the decoder                                                                                                      |

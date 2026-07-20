@@ -2,7 +2,7 @@
 
 Honest ones. Each of these tools is good at what it's for; the question is what you're building.
 
-|                        | walcast                               | Debezium                               | Supabase Realtime                    | Sequin                                  | walstream                  |
+|                        | walcast                                | Debezium                               | Supabase Realtime                    | Sequin                                  | walstream                  |
 | ---------------------- | -------------------------------------- | -------------------------------------- | ------------------------------------ | --------------------------------------- | -------------------------- |
 | Runtime                | Node library or tiny daemon            | JVM + Kafka Connect cluster            | Elixir service (managed w/ Supabase) | daemon + Postgres state                 | Rust daemon                |
 | Embeddable in your app | yes — async iterator                   | no                                     | no                                   | no                                      | no                         |

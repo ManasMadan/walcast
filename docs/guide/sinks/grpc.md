@@ -21,7 +21,7 @@ npm install @walcast/sink-grpc
 
 | Key          | Type                                        | Default             | Description                                                                              |
 | ------------ | ------------------------------------------- | ------------------- | ---------------------------------------------------------------------------------------- |
-| `address`    | `string`                                    | required            | `host:port` of your server implementing `walcast.v1.WalcastSink`.                      |
+| `address`    | `string`                                    | required            | `host:port` of your server implementing `walcast.v1.WalcastSink`.                        |
 | `tls`        | `false \| { caFile?, certFile?, keyFile? }` | `false` (plaintext) | TLS off, or paths to CA / client cert / client key files (mTLS when cert+key are given). |
 | `deadlineMs` | `number`                                    | `30000`             | Per-call deadline. A missed deadline counts as a failed attempt.                         |
 

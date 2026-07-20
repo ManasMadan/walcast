@@ -70,8 +70,8 @@ npm install walcast @walcast/sink-webhook
 npx walcast serve
 ```
 
-| Package                                             | Transport                          | Durability |
-| --------------------------------------------------- | ---------------------------------- | ---------- |
+| Package                                            | Transport                          | Durability |
+| -------------------------------------------------- | ---------------------------------- | ---------- |
 | [`@walcast/sink-webhook`](./packages/sink-webhook) | HTTP POST, HMAC-SHA256 signed      | durable    |
 | [`@walcast/sink-sse`](./packages/sink-sse)         | live Server-Sent Events endpoint   | ephemeral  |
 | [`@walcast/sink-kafka`](./packages/sink-kafka)     | Kafka, exactly-once into the topic | durable    |
@@ -113,7 +113,7 @@ Postgres 16 + single-node Kafka, 4 writers, single-row transactions):
 
 ## Compared to
 
-|                        | walcast                         | Debezium                    | Supabase Realtime | Sequin         |
+|                        | walcast                          | Debezium                    | Supabase Realtime | Sequin         |
 | ---------------------- | -------------------------------- | --------------------------- | ----------------- | -------------- |
 | runtime                | Node library or tiny daemon      | JVM + Kafka Connect cluster | hosted / Elixir   | Elixir service |
 | Kafka required         | optional (one sink)              | effectively yes             | no                | no             |

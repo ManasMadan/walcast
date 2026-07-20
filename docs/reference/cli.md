@@ -13,9 +13,9 @@ walcast --version  Print version
 | Flag                   | Applies to            | Description                                                                                                                  |
 | ---------------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `--db <url>`           | all                   | Postgres connection string. Fallback: `DATABASE_URL` (for `serve`, the full [config resolution](/reference/config) applies). |
-| `--config <path>`      | `serve`               | Daemon config file. Default `walcast.config.json`.                                                                          |
-| `--publication <name>` | setup/status/teardown | Publication name. Default `walcast`.                                                                                        |
-| `--slot <name>`        | setup/status/teardown | Slot name. Default `walcast`.                                                                                               |
+| `--config <path>`      | `serve`               | Daemon config file. Default `walcast.config.json`.                                                                           |
+| `--publication <name>` | setup/status/teardown | Publication name. Default `walcast`.                                                                                         |
+| `--slot <name>`        | setup/status/teardown | Slot name. Default `walcast`.                                                                                                |
 | `--tables <a,b>`       | `setup`               | Limit the publication to these tables (comma-separated). Default: `FOR ALL TABLES`.                                          |
 | `--yes`                | `teardown`            | Skip the confirmation prompt.                                                                                                |
 | `--help`, `-h`         | all                   | Usage.                                                                                                                       |

@@ -53,10 +53,10 @@ Daemon configuration lives in `walcast.config.json` (override the path with `wal
 
 ## Environment overrides
 
-| Variable               | Overrides          | Notes                              |
-| ---------------------- | ------------------ | ---------------------------------- |
+| Variable              | Overrides          | Notes                              |
+| --------------------- | ------------------ | ---------------------------------- |
 | `WALCAST_DB`          | `db`               | wins over `DATABASE_URL`           |
-| `DATABASE_URL`         | `db`               | conventional fallback              |
+| `DATABASE_URL`        | `db`               | conventional fallback              |
 | `WALCAST_PORT`        | `server.port`      |                                    |
 | `WALCAST_AUTH_TOKEN`  | `server.authToken` |                                    |
 | `WALCAST_PUBLICATION` | `publication`      |                                    |
@@ -75,11 +75,11 @@ No database from any source is a startup error; no sinks is the [zero-sink onboa
 
 Library mode doesn't read the config file. `new Walcast(options)` takes:
 
-| Option             | Default      | Description                                             |
-| ------------------ | ------------ | ------------------------------------------------------- |
-| `connection`       | required     | connection string or `pg.ClientConfig`                  |
+| Option             | Default     | Description                                             |
+| ------------------ | ----------- | ------------------------------------------------------- |
+| `connection`       | required    | connection string or `pg.ClientConfig`                  |
 | `publication`      | `'walcast'` | publication name                                        |
 | `slot`             | `'walcast'` | slot name                                               |
-| `tables`           | all tables   | restricts the publication when `setup()` creates it     |
-| `statusIntervalMs` | `10000`      | standby status update interval                          |
-| `highWaterMark`    | `10000`      | buffered events before the replication socket is paused |
+| `tables`           | all tables  | restricts the publication when `setup()` creates it     |
+| `statusIntervalMs` | `10000`     | standby status update interval                          |
+| `highWaterMark`    | `10000`     | buffered events before the replication socket is paused |

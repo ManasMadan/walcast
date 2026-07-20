@@ -73,9 +73,9 @@ Set `eos: false` and the sink degrades gracefully to an idempotent (but non-tran
 
 ## Summary table
 
-| Transport                            | Guarantee                   | Duplicate handling                |
-| ------------------------------------ | --------------------------- | --------------------------------- |
-| Library mode (your code)             | at-least-once               | you dedupe on `event.id`          |
+| Transport                           | Guarantee                   | Duplicate handling                |
+| ----------------------------------- | --------------------------- | --------------------------------- |
+| Library mode (your code)            | at-least-once               | you dedupe on `event.id`          |
 | `@walcast/sink-webhook`             | at-least-once               | receiver dedupes on `event.id`    |
 | `@walcast/sink-grpc`                | at-least-once               | receiver dedupes on `event.id`    |
 | `@walcast/sink-kafka` (`eos: true`) | exactly-once into the topic | none needed with `read_committed` |

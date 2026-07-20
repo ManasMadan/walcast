@@ -14,8 +14,8 @@ npm start
 | Field                | Default       | Meaning                                                                                                                         |
 | -------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `db`                 | — (required)  | Postgres connection string. Needs `wal_level=logical`.                                                                          |
-| `publication`        | `"walcast"`  | Publication name; created by `walcast setup` / on serve if missing.                                                            |
-| `slot`               | `"walcast"`  | Replication slot name. One slot = one consumer.                                                                                 |
+| `publication`        | `"walcast"`   | Publication name; created by `walcast setup` / on serve if missing.                                                             |
+| `slot`               | `"walcast"`   | Replication slot name. One slot = one consumer.                                                                                 |
 | `server.port`        | `7717`        | Admin API + dashboard port. `0` = random free port.                                                                             |
 | `server.host`        | `"127.0.0.1"` | Bind address. Loopback only by default.                                                                                         |
 | `server.authToken`   | `null`        | Bearer token for `/api` and `/ui`. `null` = a fresh token is generated per start and printed in the log; pin one in production. |
@@ -29,10 +29,10 @@ npm start
 
 ## Environment overrides (env wins over the file)
 
-| Variable               | Overrides                       |
-| ---------------------- | ------------------------------- |
+| Variable              | Overrides                       |
+| --------------------- | ------------------------------- |
 | `WALCAST_DB`          | `db` (wins over `DATABASE_URL`) |
-| `DATABASE_URL`         | `db` (conventional fallback)    |
+| `DATABASE_URL`        | `db` (conventional fallback)    |
 | `WALCAST_PORT`        | `server.port`                   |
 | `WALCAST_AUTH_TOKEN`  | `server.authToken`              |
 | `WALCAST_PUBLICATION` | `publication`                   |
@@ -41,11 +41,11 @@ npm start
 
 ## The four sinks in this config
 
-| Sink                     | Durability | What it does                                                                                                                            |
-| ------------------------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Sink                    | Durability | What it does                                                                                                                            |
+| ----------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `@walcast/sink-sse`     | ephemeral  | Live tail at `GET /plugins/live-tail/events` (Server-Sent Events). Never holds the slot back; a disconnected client just misses events. |
 | `@walcast/sink-webhook` | durable    | HMAC-signed JSON batches POSTed to your endpoint — see the [webhook-receiver](../webhook-receiver) example.                             |
 | `@walcast/sink-kafka`   | durable    | Exactly-once into per-table topics via transactions — see the [kafka-consumer](../kafka-consumer) example.                              |
-| `@walcast/sink-grpc`    | durable    | Pushes batches to your `walcast.v1.WalcastSink` server — see the [grpc-consumer](../grpc-consumer) example.                           |
+| `@walcast/sink-grpc`    | durable    | Pushes batches to your `walcast.v1.WalcastSink` server — see the [grpc-consumer](../grpc-consumer) example.                             |
 
 Durable sinks each keep their own checkpoint; the slot only advances past what _every_ durable sink has acknowledged, so one slow consumer never loses another's data.

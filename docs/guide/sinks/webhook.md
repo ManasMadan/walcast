@@ -25,7 +25,7 @@ npm install @walcast/sink-webhook
 | Key         | Type                     | Default  | Description                                                                       |
 | ----------- | ------------------------ | -------- | --------------------------------------------------------------------------------- |
 | `url`       | `string`                 | required | Endpoint receiving `POST` batches (a JSON array of events). Must be `http(s)://`. |
-| `secret`    | `string`                 | —        | HMAC-SHA256 secret. When set, the signature travels in `X-Walcast-Signature`.    |
+| `secret`    | `string`                 | —        | HMAC-SHA256 secret. When set, the signature travels in `X-Walcast-Signature`.     |
 | `headers`   | `Record<string, string>` | —        | Extra request headers, e.g. an `Authorization` header for your receiver.          |
 | `timeoutMs` | `number`                 | `30000`  | Per-request timeout. A timeout counts as a failed attempt.                        |
 
