@@ -1,6 +1,6 @@
 {
   "name": "@walcast/sink-sse",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "walcast sink: ephemeral live Server-Sent Events endpoint mounted on the walcast daemon. Node stdlib only.",
   "license": "MIT",
   "type": "module",

@@ -1,6 +1,6 @@
 {
   "name": "@walcast/sink-webhook",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "walcast sink: durable HTTP POST delivery with HMAC-SHA256 signatures. Node stdlib only.",
   "license": "MIT",
   "type": "module",

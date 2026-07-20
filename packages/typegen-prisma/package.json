@@ -1,6 +1,6 @@
 {
   "name": "@walcast/typegen-prisma",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Generate typed walcast change events from a Prisma schema. Pure codegen — zero runtime footprint.",
   "license": "MIT",
   "type": "module",

@@ -1,6 +1,6 @@
 {
   "name": "@walcast/example-library-basic",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "Library mode, zero plugins: iterate changes() in your own process and ack as you go.",
   "type": "module",

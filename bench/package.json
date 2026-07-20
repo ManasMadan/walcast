@@ -1,6 +1,6 @@
 {
   "name": "@walcast/bench",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "End-to-end benchmark: sustained inserts, commit→webhook and commit→Kafka latency. Never published.",
   "type": "module",

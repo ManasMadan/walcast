@@ -1,6 +1,6 @@
 {
   "name": "@walcast/sink-kafka",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "walcast sink: Kafka with true exactly-once semantics into the topic — transactional writes plus a compacted checkpoint topic.",
   "license": "MIT",
   "type": "module",

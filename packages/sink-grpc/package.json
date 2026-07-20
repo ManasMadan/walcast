@@ -1,6 +1,6 @@
 {
   "name": "@walcast/sink-grpc",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "walcast sink: durable delivery to your gRPC server implementing the published walcast.v1.WalcastSink contract.",
   "license": "MIT",
   "type": "module",

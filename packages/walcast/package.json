@@ -1,6 +1,6 @@
 {
   "name": "walcast",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Postgres change data capture (logical replication) for Node. The core does the least, best, for the most — every event transport is a plugin.",
   "license": "MIT",
   "type": "module",

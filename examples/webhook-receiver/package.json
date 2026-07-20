@@ -1,6 +1,6 @@
 {
   "name": "@walcast/example-webhook-receiver",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "A stdlib HTTP receiver for @walcast/sink-webhook: verify the HMAC signature, dedupe on event.id, return 2xx.",
   "type": "module",

@@ -1,6 +1,6 @@
 {
   "name": "@walcast/example-library-typed",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "Typed change events generated from a Prisma schema with @walcast/typegen-prisma.",
   "type": "module",

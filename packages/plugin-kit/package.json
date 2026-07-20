@@ -1,6 +1,6 @@
 {
   "name": "@walcast/plugin-kit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The walcast sink contract: Sink types and the conformance test harness every sink — official or community — must pass.",
   "license": "MIT",
   "type": "module",
